@@ -56,7 +56,13 @@ let db = new Sequelize(dbConfig.name, dbConfig.user, dbConfig.password,
       typeValidation: true
     },
     native: false,
-    operatorsAliases
+    operatorsAliases,
+    dialectOptions: (process.env.SSL || false) ? {
+      ssl: {
+        require: true,
+        rejectUnauthorized: false
+      }
+    } : {}
   })
 
 db.connect = () => {
@@ -77,7 +83,7 @@ db.connect = () => {
           typeValidation: true
         },
         native: true,
-        operatorsAliases
+        operatorsAliases,
       })
     logger.info('0. Does the database is reachable from the configured hostname (' + db.options.host + ') for port : ' + db.options.port + '?');
     db.authenticate().then(() => {
