@@ -57,12 +57,12 @@ let db = new Sequelize(dbConfig.name, dbConfig.user, dbConfig.password,
     },
     native: false,
     operatorsAliases,
-    dialectOptions: (process.env.SSL || false) ? {
+    dialectOptions:  {
       ssl: {
-        require: true,
+        require: (process.env.SSL || false),
         rejectUnauthorized: false
       }
-    } : {}
+    }
   })
 
 db.connect = () => {
