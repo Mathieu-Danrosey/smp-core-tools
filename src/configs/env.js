@@ -266,6 +266,7 @@ const appConfig = {
 }
 
 const rabbitMQConfig = {
+  port: process.env.RABBITMQ_PORT ?? 5672,
   url: process.env.RABBITMQ_URL,
   exchange: process.env.RABBITMQ_EXCHANGE,
   exchangeType: process.env.RABBITMQ_EXCHANGE_TYPE,
